@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: 0 0% 0%;
+    --foreground: 0 9% 94%;
+    --primary: 243 57% 53%;
+
+    --radius: 0.5rem;
+
+    --unclassified-variable: hello, world;
+}
+
