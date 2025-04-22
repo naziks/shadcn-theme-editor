@@ -6,7 +6,7 @@
 	},
 	"displayName": "Shadcn Theme Editor",
 	"description": "A theme editor for shadcn/ui (svelte)",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "See license in LICENSE",
 	"scripts": {
 		"dev": "vite dev",
@@ -14,7 +14,7 @@
 		"preview": "vite preview",
 		"build:styles": "tailwindcss -c ./tailwind.config.build.js -o ./dist/lib.css --postcss",
 		"prepare": "svelte-kit sync || echo ''",
-		"prepack": "svelte-kit sync && svelte-package",
+		"prepack": "svelte-kit sync && svelte-package && yarn run build:styles",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
