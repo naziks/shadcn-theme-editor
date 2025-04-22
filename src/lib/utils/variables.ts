@@ -1,5 +1,5 @@
-import type {ShadcnVariable} from "$lib/types.ts";
-import {hslRegex, numberRegexp} from "$lib/utils/other.ts";
+import type {ShadcnVariable} from "$lib/types.js";
+import {hslRegex, numberRegexp} from "$lib/utils/index.js";
 
 export const findValueType = (
     variable: string,

@@ -15,5 +15,14 @@ export const normalizeName = (variable: string) => {
 }
 
 export const numberRegexp = /^(?<value>(?:\d+)?(?:\.\d+)?)(?<unit>[a-z]+)$/
-export const hslRegex = /^(?<h>\d+(?:\.\d+)?) (?<s>\d+(?:\.\d+)?)%? (?<l>\d+(?:\.\d+)?)%?/
 
+export const customSerialization = {
+	serialize: JSON.stringify,
+	deserialize: (value: string) => {
+		try {
+			return JSON.parse(value)
+		} catch (e) {
+
+		}
+	},
+}

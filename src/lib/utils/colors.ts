@@ -1,7 +1,9 @@
 import type {CSSRuleExtended, ShadcnVariable} from "$lib/types.js";
-import {findValueType, hslRegex, normalizeName} from "$lib/utils/index.js";
+import {findValueType, normalizeName} from "$lib/utils/index.js";
+import {BROWSER} from "esm-env";
 
 export const getCurrentVariables = () => {
+    if (!BROWSER) return [];
     const sheets = [...document.styleSheets]
 
     return sheets.flatMap((sheet) => {
@@ -31,6 +33,7 @@ export const getCurrentVariables = () => {
     }) as ShadcnVariable[]
 }
 
+export const hslRegex = /^(?<h>\d+(?:\.\d+)?) (?<s>\d+(?:\.\d+)?)%? (?<l>\d+(?:\.\d+)?)%?/
 export const parseHsl = (hls: string) => {
     const result = hslRegex.exec(hls)?.groups as undefined | Record<'h' | 's' | 'l', string>
     if (!result) return null

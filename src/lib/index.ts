@@ -1,6 +1,2 @@
-import { ThemeEditor } from './components/index.js';
-
-export {
-    ThemeEditor as ShadcnThemeEditor,
-    ThemeEditor
-}
+import { ThemeEditor } from './components/theme-editor/index.js';
+export default ThemeEditor;

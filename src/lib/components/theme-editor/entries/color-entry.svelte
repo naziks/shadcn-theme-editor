@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ShadcnVariable } from '$lib/types.js'
-	import ColorInput from '$lib/components/color-input.svelte'
+	import ColorInput from '$lib/components/theme-editor/color-input.svelte'
 	import convert from 'color-convert'
 	import { hslToString, parseHsl } from '$lib/utils/index.js'
 

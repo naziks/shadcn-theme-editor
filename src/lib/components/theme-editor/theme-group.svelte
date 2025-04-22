@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ColorEntry from './entries/color-entry.svelte'
-	import NumberEntry from './entries/number-entry.svelte'
-	import UnknownEntry from './entries/unknown-entry.svelte'
+	import ColorEntry from '$lib/components/theme-editor/entries/color-entry.svelte'
+	import NumberEntry from '$lib/components/theme-editor/entries/number-entry.svelte'
+	import UnknownEntry from '$lib/components/theme-editor/entries/unknown-entry.svelte'
 
 	import type { ShadcnVariable } from '$lib/types.js'
 	import { ChevronRightIcon } from 'lucide-svelte'

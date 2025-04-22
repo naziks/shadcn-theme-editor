@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentVariables, mergeVariables } from '$lib/utils/index.js'
+	import {customSerialization, getCurrentVariables, mergeVariables} from '$lib/utils/index.js'
 	import ThemeGroup from './theme-group.svelte'
 	import type { ShadcnVariable } from '$lib/types.js'
 	import { onMount } from 'svelte'
@@ -10,7 +10,7 @@
 		PaletteIcon,
 		Redo2Icon,
 		RotateCcwIcon,
-		Undo2Icon,
+		Undo2Icon, XIcon,
 	} from 'lucide-svelte'
 	import { PersistedState } from 'runed'
 	import { fly, scale } from 'svelte/transition'
@@ -19,14 +19,22 @@
 	const variablesStore = new PersistedState<ShadcnVariable[]>('theme-editor-variables', [], {
 		syncTabs: true,
 		serializer: {
-			serialize: JSON.stringify,
+			...customSerialization,
 			deserialize(value) {
 				const defaultValue = getCurrentVariables()
+				let parsedValue: ShadcnVariable[] | undefined;
 				try {
-					return mergeVariables(defaultValue, JSON.parse(value))
-				} catch {
-					return defaultValue
+					const json = JSON.parse(value);
+					if (Array.isArray(json)) {
+						parsedValue = json;
+					}
+				} catch (e) {
+					parsedValue = undefined
 				}
+
+				return !parsedValue
+					? defaultValue
+					: mergeVariables(defaultValue, parsedValue)
 			},
 		},
 	})
@@ -39,8 +47,14 @@
 		},
 	)
 
-	const visible = new PersistedState('theme-editor-visible', false)
-	const side = new PersistedState<'left' | 'right'>('theme-editor-side', 'left')
+	const visible = new PersistedState('theme-editor-visible', false, {
+		syncTabs: false,
+		serializer: customSerialization,
+	})
+	const side = new PersistedState<'left' | 'right'>('theme-editor-side', 'left', {
+		syncTabs: false,
+		serializer: customSerialization,
+	})
 
 	const toggleSide = () => {
 		side.current = side.current === 'left' ? 'right' : 'left'
@@ -139,29 +153,35 @@
 	}
 </script>
 
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</svelte:head>
+
 {#if visible.current}
 	<aside
 		transition:fly={{ x: 320 * (side.current === 'left' ? -1 : 1) }}
-		class="shadcn-theme-editor fixed top-0 z-[1005000] h-full w-80 overflow-auto border-white/10 bg-black/70 pb-4 text-white shadow-md backdrop-blur transition-all {side.current === 'left' ? 'left-0 border-r-2' : 'left-[100vw] -translate-x-full transform border-l-2'}"
+		class="shadcn-theme-editor overscroll-contain fixed top-0 z-[1005000] h-full w-80 overflow-auto border-white/10 bg-black/70 pb-4 text-white shadow-md backdrop-blur transition-all {side.current === 'left' ? 'left-0 border-r-2' : 'left-[100vw] -translate-x-full transform border-l-2'}"
 	>
 		<h1
 			class="sticky left-0 top-0 z-50 flex items-center justify-between bg-black/50 px-4 py-2 font-bold"
 		>
 			<span>Theme Editor</span>
-			<button class="ml-2" onclick={() => resetVariables()} title="Reset Styles">
+			<button class="hover:opacity-70 transition-colors ml-2" onclick={() => resetVariables()} title="Reset Styles (reload from page)">
 				<RotateCcwIcon class="size-5 text-red-500" />
 			</button>
 			<span class="flex-1"></span>
 
 			<span class="inline-flex items-center gap-2">
-				<button onclick={() => toggleSide()} title="Toggle Sidebar position left-right">
+				<button class="hover:opacity-70 transition-colors" onclick={() => toggleSide()} title="Toggle Sidebar position left-right">
 					<ArrowLeftRight class="size-5" />
 				</button>
-				<button onclick={() => copyStyles()} title="Copy Current Theme">
+				<button class="hover:opacity-70 transition-colors" onclick={() => copyStyles()} title="Copy Current Theme">
 					<CopyIcon class="size-5" />
 				</button>
-				<button class="select-none text-2xl" onclick={() => (visible.current = false)}>
-					&times;
+				<button class="hover:opacity-70 transition-colorsselect-none text-2xl" onclick={() => (visible.current = false)} title="Close Theme Editor">
+					<XIcon class="size-5" />
 				</button>
 			</span>
 		</h1>
@@ -181,10 +201,10 @@
 				<div
 					class="pointer-events-auto mb-2 flex items-center gap-2 rounded-full bg-indigo-500/50 p-1"
 				>
-					<button class="history-button" disabled={!history.canUndo} onclick={() => history.undo()}>
+					<button class="history-button" title="Undo" disabled={!history.canUndo} onclick={() => history.undo()}>
 						<Undo2Icon class="size-4" />
 					</button>
-					<button class="history-button" disabled={!history.canRedo} onclick={() => history.redo()}>
+					<button class="history-button" title="Redo" disabled={!history.canRedo} onclick={() => history.redo()}>
 						<Redo2Icon class="size-4" />
 					</button>
 				</div>
@@ -231,6 +251,7 @@
 	}
 
 	:global(.theme-entry) {
+		font-family: 'Inter', sans-serif;
 		@apply flex items-center gap-2 rounded bg-white/5 p-2 text-white/80 hover:bg-white/20;
 	}
 </style>
