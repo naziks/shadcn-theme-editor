@@ -21,9 +21,13 @@ The following structure is required to be tree-shaken on the build stage and not
 {/if}
 ```
 
-## Usage
+## Preview
 ![alt text](https://github.com/naziks/shadcn-theme-editor/blob/main/docs/images/preview.png?raw=true)
 
+
+## Shortcuts
+- `Ctrl/Command + Enter` - Toggle Editor Visibility
+- `Ctrl/Command + Shift + Enter` - Toggle Editor Position (Left/Right)
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
