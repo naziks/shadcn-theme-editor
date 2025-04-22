@@ -3282,9 +3282,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shadcn-theme-editor@workspace:.":
+"shadcn-theme-editor-svelte@workspace:.":
   version: 0.0.0-use.local
-  resolution: "shadcn-theme-editor@workspace:."
+  resolution: "shadcn-theme-editor-svelte@workspace:."
   dependencies:
     "@eslint/compat": "npm:^1.2.5"
     "@eslint/js": "npm:^9.18.0"

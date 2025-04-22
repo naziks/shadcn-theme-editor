@@ -7,7 +7,7 @@ It provides a user-friendly interface to modify the theme colors and see the cha
 ## Quick Start
 ### Install dependencies
 ```bash
-yarn add shadcn-theme-editor -D
+yarn add shadcn-theme-editor-svelte -D
 ```
 ### Use in project
 The following structure is required to be tree-shaken on the build stage and not be included in the production build.
@@ -15,14 +15,14 @@ The following structure is required to be tree-shaken on the build stage and not
 <!-- src/routes/+layout.svelte -->
 
 {#if import.meta.env.DEV}
-	{#await import('shadcn-theme-editor') then { default: ShadcnThemeEditor }}
+	{#await import('shadcn-theme-editor-svelte') then { default: ShadcnThemeEditor }}
 		<ShadcnThemeEditor />
 	{/await}
 {/if}
 ```
 
 ## Preview
-![alt text](https://github.com/naziks/shadcn-theme-editor/blob/main/docs/images/preview.png?raw=true)
+![alt text](https://github.com/naziks/shadcn-theme-editor-svelte/blob/main/docs/images/preview.png?raw=true)
 
 
 ## Shortcuts

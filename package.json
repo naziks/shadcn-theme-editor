@@ -1,13 +1,16 @@
 {
-	"name": "shadcn-theme-editor",
-	"author": "naziks",
+	"name": "shadcn-theme-editor-svelte",
+	"author": {
+		"name": "Naziks",
+		"url": "https://github.com/naziks"
+	},
 	"displayName": "Shadcn Theme Editor",
 	"description": "A theme editor for shadcn/ui (svelte)",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"license": "See license in LICENSE",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && npm run prepack",
+		"build": "vite build && yarn run prepack && yarn run build:styles",
 		"preview": "vite preview",
 		"build:styles": "tailwindcss -c ./tailwind.config.build.js -o ./dist/lib.css --postcss",
 		"prepare": "svelte-kit sync || echo ''",
@@ -21,6 +24,8 @@
 		"LICENSE",
 		"README.md",
 		"dist",
+		"!dist/components/ui/**/*",
+		"!dist/utils/shadcn.*",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
@@ -38,12 +43,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/naziks/shadcn-theme-editor.git"
+		"url": "https://github.com/naziks/shadcn-theme-editor-svelte.git"
 	},
 	"bugs": {
-		"url": "https://github.com/naziks/shadcn-theme-editor/issues"
+		"url": "https://github.com/naziks/shadcn-theme-editor-svelte/issues"
 	},
-	"homepage": "https://github.com/naziks/shadcn-theme-editor#readme",
+	"homepage": "https://github.com/naziks/shadcn-theme-editor-svelte#readme",
 	"keywords": [
 		"svelte",
 		"shadcn",
