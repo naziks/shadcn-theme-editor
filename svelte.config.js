@@ -14,6 +14,7 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$root: './',
+			$src: './src',
 			$ui: './src/lib/components/ui',
 			$components: './src/lib/components/custom',
 		}

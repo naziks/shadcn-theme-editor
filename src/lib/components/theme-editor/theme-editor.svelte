@@ -15,6 +15,7 @@
 	import { PersistedState } from 'runed'
 	import { fly, scale } from 'svelte/transition'
 	import { StateHistoryDiff } from '$lib/utils/state-history/index.js'
+	import '../../lib.css';
 
 	const variablesStore = new PersistedState<ShadcnVariable[]>('theme-editor-variables', [], {
 		syncTabs: true,
