@@ -40,7 +40,8 @@ jobs:
         run: yarn install --immutable
 
       - name: Semantic Release
+        run: npx semantic-release@21.0.2 --debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release --debug
+
