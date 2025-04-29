@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write        # for pushing tags/commits
+  issues: write          # for creating issues
+  pull-requests: write   # For pull request comments
+
 jobs:
   release:
     runs-on: ubuntu-latest
