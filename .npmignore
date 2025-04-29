@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+!dist/*
+!README.md
+!package.json
+!LICENSE
+
+!LICENSE
+!README.md
+
+!dist/index.*
+!dist/lib.css
+!dist/types.*
+
+!dist/utils/**/*
+!dist/components/theme-editor/**/*

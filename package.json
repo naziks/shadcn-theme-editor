@@ -20,15 +20,6 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint ."
 	},
-	"files": [
-		"LICENSE",
-		"README.md",
-		"dist",
-		"!dist/components/ui/**/*",
-		"!dist/utils/shadcn.*",
-		"!dist/**/*.test.*",
-		"!dist/**/*.spec.*"
-	],
 	"sideEffects": [
 		"./dist/lib.css"
 	],
