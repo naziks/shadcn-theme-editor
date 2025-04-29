@@ -6,7 +6,7 @@
 	},
 	"displayName": "Shadcn Theme Editor",
 	"description": "A theme editor for shadcn/ui (svelte)",
-	"version": "1.0.4",
+	"version": "1.0.6",
 	"license": "See license in LICENSE",
 	"scripts": {
 		"dev": "vite dev",
