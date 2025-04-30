@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 permissions:
   contents: read # for checkout
@@ -39,8 +40,15 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Debug
+        run: |
+          echo "Partial NPM_TOKEN: ${NPM_TOKEN:0:5}****${NPM_TOKEN: -3}"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Semantic Release
-        run: npx semantic-release@21.0.2 --debug
+        if: secrets.NPM_TOKEN != ''
+        run: npx semantic-release@21.0.2 --debug --dry-run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
