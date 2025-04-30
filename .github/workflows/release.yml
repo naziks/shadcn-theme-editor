@@ -47,7 +47,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Semantic Release
-        if: secrets.NPM_TOKEN != ''
         run: npx semantic-release@21.0.2 --debug --dry-run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
