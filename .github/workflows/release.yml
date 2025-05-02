@@ -33,20 +33,15 @@ jobs:
         with:
           node-version: 22
           cache: 'yarn'
-          registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://registry.npmjs.org/'
 
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Debug
-        run: |
-          echo "Partial NPM_TOKEN: ${NPM_TOKEN:0:5}****${NPM_TOKEN: -3}"
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Semantic Release
-        run: npx semantic-release@21.0.2 --debug --dry-run
+        run: npx semantic-release@21.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
